@@ -19,7 +19,7 @@
     <% end %>
     <div class="row">
       <%= form.label 'Schönherz Szobaszám:' %>
-      <%= form.text_field :room_number, class: "number-field" %>
+      <%= form.text_field :room_number, class: "number-field", maxlength: 4 %>
     </div>
     <div class="row">
       <%= form.label 'Szeretnél KWC-t kapni?', class: 'block mb-2' %>

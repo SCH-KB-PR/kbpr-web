@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_12_01_115601) do
+ActiveRecord::Schema[7.0].define(version: 2025_04_04_114034) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -87,6 +87,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_12_01_115601) do
     t.decimal "point", precision: 5, scale: 3, default: "1.0"
   end
 
+  create_table "kwc_archive", force: :cascade do |t|
+    t.string "name"
+    t.bigint "release_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "links", force: :cascade do |t|
     t.string "url"
     t.string "slug"
@@ -95,7 +102,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_12_01_115601) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "enabled", default: true
-    t.decimal "point", precision: 5, scale: 3, default: "1.0"
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -129,6 +135,32 @@ ActiveRecord::Schema[7.0].define(version: 2024_12_01_115601) do
     t.index ["completed_by_id"], name: "index_orders_on_completed_by_id"
     t.index ["group_id"], name: "index_orders_on_group_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "puzzle_solutions", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.bigint "puzzle_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "puzzles", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.bigint "release_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "releases", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.boolean "published", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
